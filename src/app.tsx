@@ -5,7 +5,7 @@ import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
-import { errorConfig } from './requestErrorConfig';
+import { errorConfig } from './requestConfig';
 import { getLoginUserUsingGET } from './services/answerbi/userController';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -14,7 +14,7 @@ const loginPath = '/user/login';
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
-  currentUser?: API.CurrentUser;
+  currentUser?: API.LoginUserVO;
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -120,5 +120,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  */
 export const request = {
   baseURL: 'http://localhost:8101',
+  withCredentials: true,
   ...errorConfig,
 };
