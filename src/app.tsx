@@ -1,9 +1,11 @@
 import Footer from '@/components/Footer';
 import { Question } from '@/components/RightContent';
 import { LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
+import defaultSettings from '../config/defaultSettings';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 import { errorConfig } from './requestConfig';
 import { getLoginUserUsingGET } from './services/answerbi/userController';
@@ -14,6 +16,7 @@ const loginPath = '/user/login';
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
+  settings?: Partial<LayoutSettings>;
   currentUser?: API.LoginUserVO;
 }> {
   const fetchUserInfo = async () => {
@@ -31,9 +34,12 @@ export async function getInitialState(): Promise<{
     const currentUser = await fetchUserInfo();
     return {
       currentUser,
+      settings: defaultSettings as Partial<LayoutSettings>,
     };
   }
-  return {};
+  return {
+    settings: defaultSettings as Partial<LayoutSettings>,
+  };
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
@@ -48,7 +54,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       },
     },
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      content: initialState?.currentUser?.userName,
     },
     footerRender: () => <Footer />,
     onPageChange: () => {

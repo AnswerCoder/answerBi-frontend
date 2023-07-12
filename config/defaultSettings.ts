@@ -14,6 +14,7 @@ const Settings: ProLayoutProps & {
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
+  splitMenus: false,
   colorWeak: false,
   title: 'Ans智能BI',
   pwa: true,
