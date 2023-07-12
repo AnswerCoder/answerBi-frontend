@@ -1,6 +1,6 @@
 # Ans 智能 BI
 
-This project is initialized with [Ans 智能 BI](https://pro.ant.design). Follow is the quick guide for how to use.
+This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
 
 ## Environment Prepare
 

@@ -13,23 +13,17 @@ const Footer: React.FC = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ans智能BI',
-          title: 'Ans智能BI',
-          href: 'https://pro.ant.design',
+          key: 'blog',
+          title: 'pengSpace',
+          href: 'https://pengspace.top',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://gitee.com/anscoder',
           blankTarget: true,
-        },
-        {
-          key: 'Ans智能BI',
-          title: 'Ans智能BI',
-          href: 'https://ant.design',
-          blankTarget: true,
-        },
+        }
       ]}
     />
   );
