@@ -351,6 +351,7 @@ declare namespace API {
     id?: number;
     userAvatar?: string;
     userName?: string;
+    userAccount?: string;
     userProfile?: string;
     userRole?: string;
   };
