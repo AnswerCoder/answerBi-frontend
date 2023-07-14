@@ -1,6 +1,13 @@
 declare namespace API {
+  type BiResponse = {
+    chartId?: number;
+    genChart?: string;
+    genResult?: string;
+  };
+
   type Chart = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     createdTime?: string;
     deletedFlag?: number;
@@ -14,18 +21,21 @@ declare namespace API {
 
   type ChartAddRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     goal?: string;
   };
 
   type ChartEditRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     goal?: string;
     id?: number;
   };
 
   type ChartQueryRequest = {
+    chartName?: string;
     chartType?: string;
     current?: number;
     goal?: string;
@@ -38,6 +48,7 @@ declare namespace API {
 
   type ChartUpdateRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     createdTime?: string;
     deletedFlag?: number;
@@ -46,6 +57,12 @@ declare namespace API {
     goal?: string;
     id?: number;
     updatedTime?: string;
+  };
+
+  type CommonResponseBiResponse_ = {
+    code?: number;
+    data?: BiResponse;
+    message?: string;
   };
 
   type CommonResponseBoolean_ = {
@@ -130,6 +147,12 @@ declare namespace API {
     id?: number;
   };
 
+  type genChartByAiUsingPOSTParams = {
+    chartName?: string;
+    chartType?: string;
+    goal?: string;
+  };
+
   type getChartByIdUsingGETParams = {
     /** id */
     id?: number;
@@ -151,9 +174,9 @@ declare namespace API {
   };
 
   type LoginUserVO = {
-    createTime?: string;
+    createdTime?: string;
     id?: number;
-    updateTime?: string;
+    updatedTime?: string;
     userAvatar?: string;
     userName?: string;
     userProfile?: string;
@@ -296,9 +319,9 @@ declare namespace API {
     updatedTime?: string;
     userAccount?: string;
     userAvatar?: string;
+    userName?: string;
     userPassword?: string;
     userRole?: string;
-    username?: string;
   };
 
   type UserAddRequest = {
@@ -316,11 +339,10 @@ declare namespace API {
   type UserQueryRequest = {
     current?: number;
     id?: number;
-    mpOpenId?: string;
     pageSize?: number;
     sortField?: string;
     sortOrder?: string;
-    unionId?: string;
+    userAccount?: string;
     userName?: string;
     userProfile?: string;
     userRole?: string;
@@ -347,11 +369,11 @@ declare namespace API {
   };
 
   type UserVO = {
-    createTime?: string;
+    createdTime?: string;
     id?: number;
+    userAccount?: string;
     userAvatar?: string;
     userName?: string;
-    userAccount?: string;
     userProfile?: string;
     userRole?: string;
   };

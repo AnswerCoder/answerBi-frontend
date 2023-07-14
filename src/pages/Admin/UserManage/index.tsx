@@ -1,4 +1,4 @@
-import { listUserVOByPageUsingPOST } from '@/services/answerbi/userController';
+import { listUserByPageUsingPOST } from '@/services/answerbi/userController';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { useRef } from 'react';
@@ -14,7 +14,7 @@ export const waitTime = async (time: number = 100) => {
   await waitTimePromise(time);
 };
 
-const columns: ProColumns<API.UserVO>[] = [
+const columns: ProColumns<API.User>[] = [
   {
     dataIndex: 'id',
     valueType: 'indexBorder',
@@ -33,23 +33,31 @@ const columns: ProColumns<API.UserVO>[] = [
   {
     title: '头像',
     dataIndex: 'userAvatar',
+    search: false,
     render: (_, record) => (
       <div>
-        <Image src={record.userAvatar} width={100} />
+        <img src={record.userAvatar} width={100} />
       </div>
     )
   },
   {
     title: '角色',
     dataIndex: 'userRole',
+    valueType: 'select',
+    valueEnum :{
+      'user': {text : '普通用户',status : 'Default'},
+      'admin': {text:'管理员', status : 'Success'},
+      'ban': {text:'违规被封',status:'Error'},
+    }
   },
   {
     title: '创建时间',
+    key: 'createdTime',
     dataIndex: 'createdTime',
     valueType: 'dateTime',
+    sorter : true,
+    search : false,
   },
-  
-  
   {
     title: '操作',
     valueType: 'option',
@@ -62,9 +70,6 @@ const columns: ProColumns<API.UserVO>[] = [
         }}
       >
         编辑
-      </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        查看
       </a>,
       <TableDropdown
         key="actionGroup"
@@ -81,15 +86,15 @@ const columns: ProColumns<API.UserVO>[] = [
 export default () => {
   const actionRef = useRef<ActionType>();
   return (
-    <ProTable<API.UserVO>
+    <ProTable<API.User>
       columns={columns}
       actionRef={actionRef}
       cardBordered
       request={async (params = {}, sort, filter) => {
         console.log(sort, filter);
-        const userList = await listUserVOByPageUsingPOST(params);
+        const userList = await listUserByPageUsingPOST(params);
         return {
-          data: userList
+          data: userList.data?.records
         };
       }}
       editable={{
@@ -124,11 +129,11 @@ export default () => {
         },
       }}
       pagination={{
-        pageSize: 5,
+        pageSize: 10,
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
-      headerTitle="高级表格"
+      headerTitle="用户列表"
     />
   );
 };

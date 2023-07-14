@@ -7,7 +7,13 @@ export default [
       { name: '注册', path: '/user/register', component: './User/Register' }
     ],
   },
-  { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
+  
+  {
+    name: '智能分析',
+    path: '/add_chart',
+    icon: 'barChart',
+    component: './AddChart'
+  },
   {
     path: '/admin',
     name: '管理页',
@@ -18,6 +24,6 @@ export default [
       { path: '/admin/user-manage', name: '用户管理', icon: 'smile', component: './Admin/UserManage' },
     ],
   },
-  { path: '/', redirect: '/welcome' },
+  { path: '/', redirect: '/add_chart' },
   { path: '*', layout: false, component: './404' },
 ];
