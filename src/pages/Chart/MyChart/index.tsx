@@ -99,21 +99,16 @@ const MyChartPage: React.FC = () => {
         }}
         loading={loading}
         dataSource={chartList}
-        footer={
-          <div>
-            <b>ant design</b> footer part
-          </div>
-        }
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card style={{ width: '100%' }}>
               <List.Item.Meta
                 avatar={<Avatar src={currentUser && currentUser.userAvatar} />}
                 title={item.chartName}
-                description={item.chartType ? '图表类型' + item.chartType : undefined}
+                description={item.chartType ? '图表类型：' + item.chartType : undefined}
               />
               <div style={{ marginBottom: 16 }} />
-              {'分析目标' + item.goal}
+              {'分析目标：' + item.goal}
               <div style={{ marginBottom: 16 }} />
               <ReactECharts option={JSON.parse(item.genChart ?? '{}')}></ReactECharts>
             </Card>
