@@ -56,6 +56,9 @@ const AddChart: React.FC = () => {
           <Card title="智能分析">
             <Form
               name="addChart"
+              labelAlign='left'
+              labelCol={{span : 4}}
+              wrapperCol={{span : 16}}
               onFinish={onFinish}
               initialValues={{  }}
             >

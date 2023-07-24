@@ -14,6 +14,12 @@ export default [
     component: './Chart/AddChart'
   },
   {
+    name: '智能分析(异步)',
+    path: '/analyze/async',
+    icon: 'barChart',
+    component: './Chart/AddChartAsync'
+  },
+  {
     name: '我的图表',
     path: '/my_chart',
     icon: 'pieChart',

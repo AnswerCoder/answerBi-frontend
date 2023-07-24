@@ -11,10 +11,12 @@ declare namespace API {
     chartType?: string;
     createdTime?: string;
     deletedFlag?: number;
+    execMessage?: string;
     genChart?: string;
     genResult?: string;
     goal?: string;
     id?: number;
+    status?: string;
     updatedTime?: string;
     userId?: number;
   };
@@ -145,6 +147,12 @@ declare namespace API {
 
   type DeleteRequest = {
     id?: number;
+  };
+
+  type genChartByAiAsyncUsingPOSTParams = {
+    chartName?: string;
+    chartType?: string;
+    goal?: string;
   };
 
   type genChartByAiUsingPOSTParams = {
