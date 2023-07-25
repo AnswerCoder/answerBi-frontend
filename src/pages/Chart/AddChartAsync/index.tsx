@@ -1,4 +1,4 @@
-import { genChartByAiAsyncUsingPOST } from '@/services/answerbi/chartController';
+import { genChartByAiAsyncMqUsingPOST } from '@/services/answerbi/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, Select, Space, Upload, message } from 'antd';
 import { useForm } from 'antd/es/form/Form';
@@ -22,7 +22,7 @@ const AddChartAsync: React.FC = () => {
     };
     try{
       //需要取到上传的原始数据 file->file->originFileObj
-      const res = await genChartByAiAsyncUsingPOST(params, {}, values.file.file.originFileObj);
+      const res = await genChartByAiAsyncMqUsingPOST(params, {}, values.file.file.originFileObj);
       //正常情况下，如果没有返回值就分析失败，有就分析成功
       if(!res?.data){
         message.error('分析失败');
