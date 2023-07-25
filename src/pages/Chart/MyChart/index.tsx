@@ -1,6 +1,6 @@
-import { listMyChartByPageUsingPOST } from '@/services/answerbi/chartController';
+import { listMyChartByPageUsingPOST, regenChartByAiAsyncMqUsingPOST } from '@/services/answerbi/chartController';
 import { useModel } from '@umijs/max';
-import { Avatar, Card, List, Result, message } from 'antd';
+import { Avatar, Button, Card, List, Result, message } from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
 import React, { useEffect, useState } from 'react';
@@ -44,21 +44,43 @@ const MyChartPage: React.FC = () => {
           })
         }
       }else{
-        message.error('获取我的图表失败');
+        message.error(res.message ?? '获取我的图表失败');
       }
     } catch (e : any) {
       message.error('获取我的图表失败，' + e.message);
     }
     setLoading(false);
   }
-  
+
+  //重新生成
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const reloadGenChart = async (chartId: any) => {
+    if(submitting) return;
+    setSubmitting(true);
+    const param = { chartId : chartId };
+    try {
+      const res = await regenChartByAiAsyncMqUsingPOST(param);
+      if(!res?.data){
+        message.error(res.message ??'分析失败');
+      }else{
+        message.success('分析任务提交成功，稍后请在我的图表页面查看');
+        //重新加载一下页面
+        await loadData();
+      }
+    } catch (e: any) {
+      message.error('分析失败,' + e.message);
+    }
+    setSubmitting(false);
+  }
+   
   //首次加载页面时，触发加载数据
   useEffect(() => {
     //这个页面首次渲染的时候，以及这个数组中的搜索条件发生变化的时候，会执行loadData方法，自动触发重新搜索
-    const timer = setInterval(() => {
+    /* const timer = setInterval(() => {
       loadData();
     }, 5000);
-    return () => clearInterval(timer);    
+    return () => clearInterval(timer); */    
+    loadData();
   },[searchParams]);
 
 
@@ -149,6 +171,9 @@ const MyChartPage: React.FC = () => {
                       status="error"
                       title="图表生成失败"
                       subTitle={item.execMessage}
+                      extra={[
+                        <Button type="primary" key={item.id} onClick={()=>reloadGenChart(item.id)}>重新生成</Button>
+                      ]}
                     />
                   </>
                 }

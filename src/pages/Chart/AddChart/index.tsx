@@ -28,7 +28,7 @@ const AddChart: React.FC = () => {
       const res = await genChartByAiUsingPOST(params, {}, values.file.file.originFileObj);
       //正常情况下，如果没有返回值就分析失败，有就分析成功
       if(!res?.data){
-        message.error('分析失败');
+        message.error(res.message ??'分析失败');
       }else{
         message.success('分析成功');
         //解析成对象

@@ -322,6 +322,11 @@ declare namespace API {
     userId?: number;
   };
 
+  type regenChartByAiAsyncMqUsingPOSTParams = {
+    /** chartId */
+    chartId?: number;
+  };
+
   type uploadFileUsingPOSTParams = {
     biz?: string;
   };

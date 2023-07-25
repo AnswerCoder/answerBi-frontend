@@ -25,7 +25,7 @@ const AddChartAsync: React.FC = () => {
       const res = await genChartByAiAsyncMqUsingPOST(params, {}, values.file.file.originFileObj);
       //正常情况下，如果没有返回值就分析失败，有就分析成功
       if(!res?.data){
-        message.error('分析失败');
+        message.error(res.message ?? '分析失败');
       }else{
         message.success('分析任务提交成功，稍后请在我的图表页面查看');
         form.resetFields();
@@ -41,6 +41,7 @@ const AddChartAsync: React.FC = () => {
     <div className='add-chart-async'>
       <Card title="智能分析">
         <Form
+          form={form}
           name="addChart"
           labelAlign='left'
           labelCol={{span : 4}}

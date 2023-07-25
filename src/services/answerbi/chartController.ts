@@ -200,6 +200,21 @@ export async function listMyChartByPageUsingPOST(
   });
 }
 
+/** regenChartByAiAsyncMq POST /api/chart/regen */
+export async function regenChartByAiAsyncMqUsingPOST(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.regenChartByAiAsyncMqUsingPOSTParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.CommonResponseBiResponse_>('/api/chart/regen', {
+    method: 'POST',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** updateChart POST /api/chart/update */
 export async function updateChartUsingPOST(
   body: API.ChartUpdateRequest,
